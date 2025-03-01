@@ -1,0 +1,25 @@
+name: Deploy to Server
+
+on:
+  push:
+    branches:
+      - main # або інша гілка, яку ви хочете використовувати для розгортання
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest # або інша віртуальна машина, на якій буде виконуватися розгортання
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install project
+        run: curl -L -k -s https://lampac.sh | bash
+
+      # Подальші кроки для запуску та налаштування веб-сервісу
+      # Замініть на свої команди
+      - name: Start service
+        run: sudo systemctl start Lampac_2023
+
+      - name: Enable service
+        run: sudo systemctl enable Lampac_2023
